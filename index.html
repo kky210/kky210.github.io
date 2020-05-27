@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge, chrome=1" />
+
+    <meta name="author" content="" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="copyright" content="" />
+
+    <!-- Chrome, Safari, IE -->
+    <link rel="shortcut icon" type="image/x-icon" href="">
+    <link rel="apple-touch-icon-precomposed" href="">
+
+<!--    <link rel="stylesheet" href="/resources/css/common.css">-->
+<!--    <script src="/resources/js/prefixfree.min.js"></script>
+    <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>-->
+
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,900&display=swap" rel="stylesheet">
+
+    <title>HPC Asia 2021</title>
+    
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, 
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+            text-decoration: none;
+            list-style: none;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure, 
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        html,
+        body {
+            min-width: 1400px;
+            line-height: 1;
+            color: #262e3c;
+            font-size: 21px;
+            font-weight: 400;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        ol,
+        ul {
+            list-style: none;
+        }
+
+        blockquote,
+        q {
+            quotes: none;
+        }
+
+        blockquote:before,
+        blockquote:after,
+        q:before,
+        q:after {
+            content: "";
+            content: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        button {
+            padding: 0;
+            margin: 0;
+            background: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+        
+        textarea {
+            resize: none;
+            padding: 5px 10px;
+            outline: none;
+        }
+
+        /*Common Style*/
+        .clear-float {
+            clear: both;
+        }
+
+        .space-5 {
+            height: 5px;
+        }
+
+        .space-10 {
+            height: 10px;
+        }
+
+        .space-15 {
+            height: 15px;
+        }
+
+        .space-20 {
+            height: 20px;
+        }
+
+        .space-25 {
+            height: 25px;
+        }
+
+        .space-30 {
+            height: 30px;
+        }
+
+        .space-35 {
+            height: 35px;
+        }
+
+        .space-40 {
+            height: 40px;
+        }
+
+        .space-45 {
+            height: 45px;
+        }
+
+        .space-50 {
+            height: 50px;
+        }
+
+        .al {
+            text-align: left;
+        }
+
+        .ac {
+            text-align: center;
+        }
+
+        .ar {
+            text-align: right;
+        }
+
+        .pd-0 {
+            padding: 0!important;
+        }
+
+        .mb-0 {
+            margin-bottom: 0 !important;
+        }
+        
+        .mt-0 {
+            margin-top: 0 !important;
+        }
+
+        .ml-0 {
+            margin-left: 0 !important;
+        }
+        
+        .mr-0 {
+            margin-right: 0 !important;
+        }
+
+        .none {
+            display: none;
+        }
+
+        .cursor {
+            cursor: pointer;
+        }
+        
+        .wrap {
+            width: 100%;
+        }
+        
+        header {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background: #fff;
+            z-index: 20;
+        }
+        
+        header > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 25px;
+            font-weight: 700;
+        }
+        
+        .toggle-btn {
+            width: 85px;
+            height: 85px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        
+        .toggle-btn img {
+            width: auto;
+            height: 25px;
+        }
+        
+        header > div,
+        nav > ul {
+            width: 1400px;
+            margin: 0 auto;
+        }
+        
+        nav {
+        }
+                
+        nav ul {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+        
+        nav ul li a {
+            font-size: 19px;
+            line-height: 40px;
+            font-weight: 600;
+            display: block;
+            padding: 0 15px;
+            text-align: center;
+            position: relative;
+        }
+        
+        nav ul li a:before {
+            content: '';
+            width: 100%;
+            height: 4px;
+            background-color: transparent;
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+        }
+        
+        nav ul li a.on:before {
+            background-color: #202638;
+        }
+        
+        .visual-area {
+            width: 100%;
+            height: 600px;
+            background: url(/resources/image/visual-02.png) center center / cover no-repeat;
+            margin-top: 125px;
+        }
+        
+        .visual,
+        .content-area {
+            width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .visual {
+            padding-top: 100px;
+            height: 100%;
+            position: relative;
+        }
+        
+        .visual h1 {
+            font-size: 90px;
+            font-weight: 700;
+            text-align: center;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+        }
+        
+        .visual p {
+            font-size: 30px;
+            line-height: 40px;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            bottom: 50px;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+        }
+        
+        section {
+            padding: 100px;
+            border-bottom: 1px solid #e1e1e1;
+        }
+        
+        section:last-of-type {
+            border-bottom: none;
+        }
+        
+        .content-area h3 {
+            font-size: 35px;
+            font-weight: 900;
+            font-style: italic;
+            line-height: 45px;
+            margin-bottom: 30px;
+            text-align: center;
+            
+        }
+        
+        section p {
+            line-height: 33px;
+        }
+        
+        section table {
+            width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .tb-01 {
+            border-top: 2px solid #e1e1e1;
+            border-bottom: 2px solid #e1e1e1;
+        }
+        
+        .tb-01 tr:nth-of-type(odd) td {
+            background: #f9f9f9;
+        }
+        
+        .tb-01 tr {
+            border-bottom: 1px solid #e1e1e1;
+        }
+        
+        .tb-01 tr:last-of-type {
+            border-bottom: none;
+        }
+        
+        .tb-01 td {
+            padding: 20px 15px;
+            font-weight: 600;
+        }
+        
+        .tb-01 td:last-of-type {
+            font-weight: 400;
+        }
+        
+        .program-date-list {
+            display: flex;
+            justify-content: space-around;
+            width: 900px;
+            margin: 0 auto;
+            margin-bottom: 30px;
+        }
+        
+        .program-date-list li {
+            color: #777;
+            font-size: 19px;
+            font-style: italic;
+            text-align: center;
+            line-height: 30px;
+            display: block;/*
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            background: #f4f4f4;*/
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            position: relative;
+            transition: .3s;
+        }
+        
+        .program-date-list li.on {
+            color: #202638;
+            border-bottom: 3px solid #202638;
+        }
+        
+        .program-date-list li:hover {
+            color: #202638;
+        }
+        
+        .program-date-list li:after {
+            content: '/';
+            position: absolute;
+            right: -15px;
+            top: 0;
+        }
+        
+        .program-date-list li.on:after {
+            color: #777;
+        }
+        
+        .program-date-list li:last-of-type:after {
+            display: none;
+        }
+        
+        .tb-02 {
+            border: 1px solid #bbc5d9;
+        }
+        
+        .tb-02 thead {
+            border-top: 1px solid #bbc5d9;
+        }
+        
+        .tb-02 thead:first-of-type {
+            border-top: none;
+        }
+        
+        .tb-02 th {
+            background: #dfe1e6;
+            padding: 10px 10px;
+            font-size: 19px;
+            font-weight: 600;
+        }
+        
+        .tb-02 td {
+            padding: 10px 10px;
+            font-size: 18px;
+            border-right: 1px solid #e3e3e3;
+            text-align: center;
+        }
+        
+        .tb-02 td:last-of-type {
+            border-right: none;
+        }
+        
+        .tb-02 tr {
+            border-bottom: 1px solid #e3e3e3;
+        }
+        
+        .tb-02 tr:last-of-type {
+            border-bottom: none;
+        }
+        
+        .tb-02 td:first-of-type {
+            font-weight: 600;
+            background: #f9f9f9;
+        }
+        
+        footer {
+            padding: 20px;
+            background: #f4f4f4;
+            color: #777;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .top-btn {
+            width: 30px;
+            height: 60px;
+            position: absolute;
+            bottom: 40px;
+            right: 0px;
+            background: url(/resources/image/arrow-top.svg) center center / 30px auto no-repeat;
+        }
+    
+    </style>
+
+    <script>
+    </script>
+</head>
+
+<body>
+   
+   <div class="wrap">
+       <header>
+           <div>
+               <div class="logo">HPC Asia 2021</div>
+               <div class="toggle-btn">
+                   <img src="/resources/image/toggle.svg" alt="">
+               </div>
+           </div>
+            <nav>
+               <ul>
+                   <li><a href="#" class="on">Home</a></li>
+                   <li><a href="#">Important Dates</a></li>
+                   <li><a href="#">Program</a></li>
+                   <li><a href="#">Invited Talks</a></li>
+                   <li><a href="#">Workshops</a></li>
+                   <li><a href="#">Venue</a></li>
+                   <li><a href="#">Registation</a></li>
+                   <li><a href="#">Committee</a></li>
+                   <li><a href="#">Sponsors</a></li>
+                   <li><a href="#">Contact</a></li>
+                   <li><a href="#">Past HPC Asia</a></li>
+               </ul>
+           </nav>
+       </header>
+
+       
+       <div class="visual-area">
+            <div class="visual">
+               <h1>
+                   HPC Asia 2021
+               </h1>
+               <p>
+                   International Conference on High Performance Computing<br>in Asia-Pacific Region Jeju, Korea, Jan. 15 -17, 2021
+               </p>
+           </div>
+       </div>
+       
+       <div class="content-area">
+           <section>
+               <h3>Welcome to HPC Asia 2020</h3>
+               <p>High performance computing is a key technology to solve large problems in science, engineering, and business by utilizing computing power which has been evolving to the future. HPC Asia is an international conference series on HPC technologies in Asia Pacific region to exchange ideas, research results and case studies related to all issues of high performance computing and related technologies. Recently, it was held in Tokyo, Japan (2018) and in Guangzhou, China (2019). Then, the next conference, HPC Asia 2020, will be held in Fukuoka, Japan.</p>
+           </section>
+           <section>
+               <h3>Important Dates</h3>
+               <table class="tb-01">
+                   <colgroup>
+                       <col width="30%" />
+                       <col width="70%" />
+                   </colgroup>
+                   <tr>
+                       <td>Workshop proposal deadline</td>
+                       <td>June 30, 2020 (AoE, Anywhere on Earth, UTC-12)</td>
+                   </tr>
+                   <tr>
+                       <td>Abstract submissions due</td>
+                       <td>August 2(Extended) August 26, 2020 (AoE, Anywhere on Earth, UTC-12), No further extension!</td>
+                   </tr>
+                   <tr>
+                       <td>Paper submissions due</td>
+                       <td>August 9(Extended) August 31, 2020 (AoE, Anywhere on Earth, UTC-12), No further extension!</td>
+                   </tr>
+                   <tr>
+                       <td>Paper submissions due</td>
+                       <td>August 9(Extended) August 31, 2020 (AoE, Anywhere on Earth, UTC-12), No further extension!</td>
+                   </tr>
+               </table>
+           </section>
+           <section>
+               <h3>Program</h3>
+               <ul class="program-date-list">
+                   <li>Tuseday, January 14</li>
+                   <li class="on">Wednesday, January 15</li>
+                   <li>Thursday, January 16</li>
+                   <li>Friday, January 17</li>
+                   <li>Posters</li>
+               </ul>
+               <table class="tb-02">
+                   <colgroup>
+                       <col width="20%" />
+                       <col width="40%" />
+                       <col width="40%" />
+                   </colgroup>
+                   <tr>
+                       <th colspan="3">Registration Desk (4F)</th>
+                   </tr>
+                   <tr>
+                       <td>9:00am - 5:00pm</td>
+                       <td colspan="2">Registration</td>
+                   </tr>
+                   <tr>
+                       <th colspan="2">International Conference Hall (4F)</th>
+                       <th>Conference Room B (7F)</th>
+                   </tr>
+                   <tr>
+                       <td>9:00am - 5:00pm</td>
+                       <td>Opening</td>
+                       <td></td>
+                   </tr>
+               </table>
+           </section>
+           <div class="top-btn cursor"></div>
+       </div>
+       <footer>
+           <p>© HPC Asia 2021 Organizing Committee. All rights reserved.</p>
+       </footer>
+   </div>
+    
+</body>
+
+</html>
